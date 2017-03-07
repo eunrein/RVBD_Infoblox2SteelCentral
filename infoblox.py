@@ -11,7 +11,7 @@ list below.
 Using a config file type declaration was preferred over ArgumentParser as this script will probably run via
 a cronjob.
 
-
+Credit to the original author, (very) small modifications made by Elizabeth Unrein (eunrein@gmail.com).
 """
 
 __author__ = 'Andre Dieball (andre@dieball.net)'
@@ -64,8 +64,10 @@ def main():
     net_loc = []
     resp_d = json.loads(response.read())
     for obj in resp_d:
-        net_loc.append ({"cidr": obj["network"], "name": obj["extattrs"][extattrs]["value"]})
-
+       	try:
+			net_loc.append ({"cidr": obj["network"], "name": obj["extattrs"][extattrs]["value"]})
+		except:
+			pass
     conn.close()
 
 
